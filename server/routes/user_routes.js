@@ -16,6 +16,16 @@ module.exports = function loadUserRoutes(router, passport) {
     failureRedirect: '/'
   }));
 
+  router.get('/auth/khan', passport.authenticate('khan', {
+    successRedirect: '/',
+    failureRedirect: '/'
+  }));
+
+  router.get('/auth/khan/callback', passport.authenticate('khan', {
+    successRedirect: '/',
+    failureRedirect: '/'
+  }));
+
   router.post('/sign_up', passport.authenticate('local-signup'), function(req, res) {
     res.json(req.user);
   });

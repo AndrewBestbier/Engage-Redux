@@ -1,8 +1,9 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
+var KhanStrategy = require('passport-khan').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../server/models/User');
 var oAuthConfig = require('./oAuthConfig');
-var host = process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'slackclone.herokuapp.com'
+var host = process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'slackclone.herokuapp.com';
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
@@ -16,6 +17,36 @@ module.exports = function(passport) {
       done(err, user);
     });
   });
+
+  passport.use(new KhanStrategy({
+    consumerKey: '3vnMK6mH56ekcfTL',
+    consumerSecret: 'anWxW939cw4pV8HA',
+    callbackURL: "http://127.0.0.1:3000/api/auth/khan/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOne({ 'khan.id': profile.id }, function(err, user) {
+      if (err) { console.log(err); }
+      if (!err && user !== null) {
+        user.online = true;
+        user.save(function(err) {
+          if (err) { console.log(err); }
+          done(null, user);
+        });
+      } else {
+        var newUser = new User({ 'khan.id': profile.id, 'khan.username': profile.displayName, online: true});
+        newUser.save(function(err, user) {
+          if (err) {
+            console.log(err);
+          } else {
+            done(null, user);
+          }
+        });
+      }
+    })
+  }
+));
+
+
 
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'username',
