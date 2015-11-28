@@ -89,6 +89,7 @@
     "passport-facebook": "^2.0.0",
     "passport-local": "^1.0.0",
     "react": "^0.14.2",
+    "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.2",
     "react-redux": "^2.1.2",
     "react-router": "1.0.0-beta3",
