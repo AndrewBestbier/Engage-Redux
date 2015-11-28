@@ -14,6 +14,7 @@ export default class NavBar extends Component {
         <Nav>
           <NavItem eventKey={1} href="#welcome">Welcome</NavItem>
           <NavItem eventKey={2} href="#chat">Chat</NavItem>
+          <NavItem eventKey={2} href="#join">Join</NavItem>
         </Nav>
       </Navbar>
     );

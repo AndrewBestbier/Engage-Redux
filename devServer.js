@@ -46,12 +46,15 @@ app.use(passport.session());
 var messageRouter = express.Router();
 var usersRouter = express.Router();
 var channelRouter = express.Router();
+var roomRouter = express.Router();
 require('./server/routes/message_routes')(messageRouter);
 require('./server/routes/channel_routes')(channelRouter);
+require('./server/routes/room_routes')(roomRouter);
 require('./server/routes/user_routes')(usersRouter, passport);
 app.use('/api', messageRouter);
 app.use('/api', usersRouter);
 app.use('/api', channelRouter);
+app.use('/api', roomRouter);
 
 app.use('/', express.static(path.join(__dirname)));
 var webpackServer = app.listen(process.env.PORT, 'localhost', function(err) {
