@@ -2,17 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import * as Actions from '../actions/Actions';
 import {Button, Modal, Input, Panel} from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { updatePath } from 'redux-simple-router'
 
 class Join extends Component {
 
   handleSubmit(event) {
     const { dispatch } = this.props;
-    const dangerouslyHardcodedRoomCode = '1234'
-
+    const dangerouslyHardcodedRoomCode = '1234';
 
     dispatch(Actions.joinRoom()).then(() => {
       //this.context.router.transitionTo('/chat');
-      console.log("dsd");
+      console.log("joined room");
     });
   }
 

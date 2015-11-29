@@ -15,7 +15,8 @@ class ChatContainer extends Component {
 }
 function mapStateToProps(state) {
   return {
-      messages: state.messages.data,
+      messages: state.messages.get('messages'),
+      currentRoom: state.messages.get('currentRoom')
   }
 }
 export default connect(mapStateToProps)(ChatContainer)

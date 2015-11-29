@@ -9,7 +9,7 @@ export function addMessage(message) {
 
 export function joinRoom() {
   return {
-    types: ['JOIN_ROOM', 'JOIN_ROOM_SUCCESS', 'JOIN_ROOM_FAIL'],
+    types: ['JOINING_ROOM', 'JOINING_ROOM_SUCCESS', 'JOINING_ROOM_FAIL'],
     promise: UserAPIUtils.joinRoom()
   };
 }

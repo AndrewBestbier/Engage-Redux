@@ -1,17 +1,18 @@
-const initialState = {
-  loaded: false,
-  data: []
-};
-export default function messages(state = initialState, action) {
+import {Map, List} from 'immutable';
+
+const initialState = Map({
+  currentRoom: null,
+  messages: List()
+})
+
+export default function(state = initialState, action) {
   switch (action.type) {
   case 'RECEIVE_MESSAGE':
-    return {...state,
-      data: [...state.data, {
-        id: (state.data.length === 0 ) ? 0 : state.data[state.data.length - 1].id + 1,
-        text: action.message.text,
-        time: action.message.time
-      }]
-    };
+    return state.update('messages', messages => messages.push({text: action.message.text}));
+  case 'JOINING_ROOM':
+    return state;
+  case 'JOINING_ROOM_SUCCESS':
+    return state.set('currentRoom', 'sexy')
   default:
     return state;
   }

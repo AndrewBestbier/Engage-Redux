@@ -2,22 +2,22 @@ import React, { Component, PropTypes } from 'react';
 import {Button, Modal, Input, Panel} from 'react-bootstrap';
 import strftime from 'strftime';
 
-const socket = io.connect('http://localhost');
-
 export default class Chat extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {
       text: '',
-      showModal: false
+      showModal: false,
     };
   }
 
-  componentWillMount(){
+  componentDidMount() {
+    this.socket = io.connect('http://localhost');
+
     const { actions } = this.props;
 
-    socket.on('backchannel', message =>
+    this.socket.on('backchannel', message =>
       actions.addMessage(message)
     );
   }
@@ -42,7 +42,7 @@ export default class Chat extends Component {
       time: strftime('%H:%M %p', new Date())
     };
 
-    socket.emit('new message', newMessage);
+    this.socket.emit('new message', newMessage);
 
     this.setState({showModal: false, text: ''})
   }
@@ -51,11 +51,9 @@ export default class Chat extends Component {
 
     const filteredMessages = this.props.messages.map(message => <div className='col-md-12'><Panel>{message.text}</Panel></div>);
 
-
-
     return (
       <div>
-        <h2>Chat</h2>
+        <h2>{this.props.currentRoom}</h2>
         <div className='container'><div className='row'>{filteredMessages}</div></div>
 
         <Button bsStyle="primary" onClick={::this.open}>Ask</Button>
