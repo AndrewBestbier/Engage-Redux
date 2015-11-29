@@ -51,7 +51,7 @@ export default class Chat extends Component {
 
   render() {
 
-    const filteredMessages = this.props.messages.map(message => <div className='col-md-12'><Panel>{message.text}</Panel></div>);
+    const filteredMessages = this.props.messages.map(message => <div className='col-md-12'><Panel>{message}</Panel></div>);
 
     return (
       <div>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/Actions';
 import { Input, Button } from 'react-bootstrap';
 
-export default class SignUp extends Component {
+export default class Register extends Component {
 
 
   handleSubmit(event) {
@@ -23,7 +23,7 @@ export default class SignUp extends Component {
   render() {
     return (
       <div>
-        <div onClick={::this.handleSubmit}>Sign Up</div>
+        <div onClick={::this.handleSubmit}>Register</div>
       </div>
     );
   }

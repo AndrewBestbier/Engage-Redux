@@ -7,7 +7,7 @@ const initialState = Map({
 export default function(state = initialState, action) {
   switch (action.type) {
   case 'RECEIVE_MESSAGE':
-    return state.update('messages', messages => messages.push({text: action.message.text}));
+    return state.update('messages', messages => messages.push(action.message.text));
   default:
     return state;
   }

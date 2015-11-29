@@ -6,7 +6,6 @@ import WelcomePage from '../components/WelcomePage';
 import Join from '../components/Join';
 import NavBar from '../components/NavBar';
 import SignUp from '../components/SignUp';
-
 import Create from '../components/Create';
 import configureStore from '../store/configureStore';
 const store = configureStore();
@@ -18,7 +17,7 @@ export default class Root extends Component {
 
     return (
       <div className="root">
-        <NavBar />
+        <NavBar {...this.props} />
         <Provider store={store} >
           <Router history={history}>
             <Redirect from="/" to="/welcome" />

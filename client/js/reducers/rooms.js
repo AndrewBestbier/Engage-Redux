@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
   case 'JOINING_ROOM':
     return state;
   case 'JOINING_ROOM_SUCCESS':
-    return state.set('currentRoom', 'sexy')
+    return state.set('currentRoom', 'andrew')
   case 'CREATING_ROOM':
     return state;
   case 'CREATE_ROOM_SUCCESS':
