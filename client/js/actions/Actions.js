@@ -13,3 +13,10 @@ export function joinRoom() {
     promise: UserAPIUtils.joinRoom()
   };
 }
+
+export function createRoom(room) {
+  return {
+    types: ['CREATING_ROOM', 'CREATE_ROOM_SUCCESS', 'CREATE_ROOM_FAIL'],
+    promise: UserAPIUtils.createRoom(room)
+  };
+}

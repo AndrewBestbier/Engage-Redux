@@ -6,6 +6,8 @@ import WelcomePage from '../components/WelcomePage';
 import Join from '../components/Join';
 import NavBar from '../components/NavBar';
 import SignUp from '../components/SignUp';
+
+import Create from '../components/Create';
 import configureStore from '../store/configureStore';
 const store = configureStore();
 
@@ -24,6 +26,7 @@ export default class Root extends Component {
             <Route path="/chat" component={ChatContainer} />
             <Route path="/join" component={Join} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/create" component={Create} />
           </Router>
         </Provider>
       </div>

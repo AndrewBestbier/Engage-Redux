@@ -15,3 +15,20 @@ export function joinRoom() {
     });
   });
 }
+
+export function createRoom(room) {
+  return new Promise((resolve, reject) => {
+    superagent
+    .post('/api/rooms/new_room')
+    .send(room)
+    .end((err, res) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        console.log(res);
+        resolve(res.body);
+      }
+    });
+  });
+}

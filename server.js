@@ -48,8 +48,6 @@ app.use('/api', roomRouter);
 
 app.use('/', express.static(path.join(__dirname)));
 
-console.log("world");
-
 http.listen(process.env.PORT, function() {
     console.log('server listening on port: %s', process.env.PORT);
 });

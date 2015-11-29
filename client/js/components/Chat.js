@@ -13,12 +13,14 @@ export default class Chat extends Component {
   }
 
   componentDidMount() {
-    this.socket = io.connect('http://localhost');
+    this.socket = io.connect();
+
+    this.socket.emit('subscribe', 'roomOne');
 
     const { actions } = this.props;
 
     this.socket.on('backchannel', message =>
-      actions.addMessage(message)
+      actions.addMessage(message.message)
     );
   }
 
@@ -42,7 +44,7 @@ export default class Chat extends Component {
       time: strftime('%H:%M %p', new Date())
     };
 
-    this.socket.emit('new message', newMessage);
+    this.socket.emit('new message', { room: 'roomOne', message: newMessage });
 
     this.setState({showModal: false, text: ''})
   }
