@@ -20,3 +20,31 @@ export function createRoom(room) {
     promise: UserAPIUtils.createRoom(room)
   };
 }
+
+
+export function signIn(user) {
+  return {
+    types: ['AUTH_SIGNIN',
+      'AUTH_SIGNIN_SUCCESS',
+      'AUTH_SIGNIN_FAIL'],
+    promise: UserAPIUtils.signIn(user)
+  };
+}
+
+export function signUp(user) {
+  return {
+    types: ['AUTH_SIGNUP',
+      'AUTH_SIGNUP_SUCCESS',
+      'AUTH_SIGNUP_FAIL'],
+    promise: UserAPIUtils.signUp(user)
+  };
+}
+
+export function signOut(user) {
+  return {
+    types: ['AUTH_SIGNOUT',
+      'AUTH_SIGNOUT_SUCCESS',
+      'AUTH_SIGNOUT_FAIL'],
+    promise: UserAPIUtils.signOut(user)
+  };
+}

@@ -6,11 +6,11 @@ import reducer from '../../client/js/reducers/user';
 
 describe('user', () => {
 
-  it('handles USER_LOGIN_SUCCEEDED and sets the state appropriately', () => {
+  it('handles AUTH_SIGNIN and sets the state appropriately', () => {
     const initialState = Map();
 
     const action = {
-      type: 'USER_LOGGED_IN'
+      type: 'AUTH_SIGNIN'
     };
 
     const nextState = reducer(initialState, action);
@@ -20,13 +20,13 @@ describe('user', () => {
     }));
   });
 
-  it('handles USER_LOGOUT and sets the state appropriately', () => {
+  it('handles AUTH_SIGNOUT and sets the state appropriately', () => {
     const initialState = Map({
       authenticated: true
     });
 
     const action = {
-      type: 'USER_LOGOUT'
+      type: 'AUTH_SIGNOUT'
     };
 
     const nextState = reducer(initialState, action);

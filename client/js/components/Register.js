@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/Actions';
 import { Input, Button } from 'react-bootstrap';
 
-export default class Register extends Component {
-
+class Register extends Component {
 
   handleSubmit(event) {
     const { dispatch } = this.props;
 
     const userObj = {
       username: 'andy',
-      password: 'password',
-      confirmPassword: 'password'
+      password: 'password'
     };
 
     dispatch(Actions.signUp(userObj)).then(() => {
@@ -28,3 +26,11 @@ export default class Register extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+      messages: state.messages.data,
+  }
+}
+
+export default connect(mapStateToProps)(Register);

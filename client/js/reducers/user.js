@@ -7,9 +7,9 @@ const initialState = Map({
 export default function (state = initialState, action) {
 
   switch (action.type) {
-    case 'USER_LOGGED_IN':
+    case 'AUTH_SIGNIN':
       return state.set('authenticated', true)
-    case 'USER_LOGOUT':
+    case 'AUTH_SIGNOUT':
       return state.set('authenticated', false)
     default:
       return state;

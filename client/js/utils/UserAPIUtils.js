@@ -32,3 +32,48 @@ export function createRoom(room) {
     });
   });
 }
+
+export function signUp(user) {
+  console.log(user);
+  return new Promise((resolve, reject) => {
+    superagent
+    .post('/api/sign_up')
+    .send(user)
+    .end((err, res) => {
+      if (err) {
+        console.log(err);
+        Promise.reject(err);
+      } else {
+        resolve(res.body);
+      }
+    });
+  });
+}
+
+export function signIn(user) {
+  return new Promise((resolve, reject) => {
+    superagent
+    .post('/api/sign_in')
+    .send(user)
+    .end((err, res) => {
+      if (err) {
+        Promise.reject(err);
+      } else {
+        resolve(res.body);
+      }
+    });
+  });
+}
+export function signOut() {
+  return new Promise((resolve, reject) => {
+    superagent
+    .get('/api/signout')
+    .end((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+}

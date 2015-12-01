@@ -2,7 +2,6 @@
 import './css/bootstrap.min.css';
 import './css/main.css';
 import React from 'react';
-import Root from './js/containers/Root';
 import HashHistory from 'react-router/lib/HashHistory';
 import ReactDOM from 'react-dom';
 import configureStore from './js/store/configureStore';
