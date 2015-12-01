@@ -8,12 +8,9 @@ class Join extends Component {
 
   handleSubmit(event) {
     const { dispatch } = this.props;
-    const dangerouslyHardcodedRoomCode = '1234';
+    const dangerouslyHardcodedRoomCode = '41lIMsIEg';
 
-    dispatch(Actions.joinRoom()).then(() => {
-      //this.context.router.transitionTo('/chat');
-      console.log("joined room");
-    });
+    dispatch(Actions.joinRoom(dangerouslyHardcodedRoomCode))
   }
 
   render() {

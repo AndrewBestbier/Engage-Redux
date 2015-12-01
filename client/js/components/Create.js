@@ -11,7 +11,6 @@ class Create extends Component {
 
     let room = {
       name: 'Andrew',
-      id: 1
     }
 
     dispatch(Actions.createRoom(room)).then(() => {

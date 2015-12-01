@@ -1,15 +1,15 @@
 import superagent from 'superagent';
 
-export function joinRoom() {
+export function joinRoom(roomCode) {
   return new Promise((resolve, reject) => {
     superagent
-    .get('/api/join_room')
+    .get('/api/rooms/'+roomCode)
     .end((err, res) => {
       if (err) {
-        console.log(err);
-        Promise.reject(err);
+        reject(err);
+      } else if (res.body.length === 0){
+        reject(Error("No room was found with that code"))
       } else {
-        console.log(res);
         resolve(res.body);
       }
     });
@@ -41,8 +41,7 @@ export function signUp(user) {
     .send(user)
     .end((err, res) => {
       if (err) {
-        console.log(err);
-        Promise.reject(err);
+        reject(err);
       } else {
         resolve(res.body);
       }
@@ -57,7 +56,7 @@ export function signIn(user) {
     .send(user)
     .end((err, res) => {
       if (err) {
-        Promise.reject(err);
+        reject(err);
       } else {
         resolve(res.body);
       }

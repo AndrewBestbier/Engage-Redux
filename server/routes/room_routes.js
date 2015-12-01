@@ -5,7 +5,7 @@ module.exports = function(router) {
   router.use(bodyparser.json());
 
   router.get('/join_room', function(req, res) {
-    res.json('Hello Andrew');
+    res.json('Hello Andrewx');
   });
 
   //Get all the rooms in Engage
@@ -18,6 +18,19 @@ module.exports = function(router) {
       res.json(data);
     });
   });
+
+  // get a specific channel
+  router.get('/rooms/:id', function(req, res) {
+
+    Room.find({_id: req.params.id}, function(err, data) {
+      if(err) {
+        console.log(err);
+        return res.status(500).json({msg: 'internal server error'});
+      }
+
+      res.json(data)
+    })
+  })
 
   //Create a new Room
   router.post('/rooms/new_room', function(req, res) {

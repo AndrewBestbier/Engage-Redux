@@ -2,7 +2,7 @@
 import './css/bootstrap.min.css';
 import './css/main.css';
 import React from 'react';
-import HashHistory from 'react-router/lib/HashHistory';
+import history from './js/utils/history'
 import ReactDOM from 'react-dom';
 import configureStore from './js/store/configureStore';
 import { Redirect, Router, Route } from 'react-router';
@@ -20,17 +20,16 @@ import Create from './js/components/Create';
 
 //Initialising
 const store = configureStore();
-const history = new HashHistory();
 
 /* Routes */
 const routes = <Route component={AppContainer}>
-  <Redirect from="/" to="/welcome" />
-  <Route path="/welcome" component={WelcomePage} />
-  <Route path="/chat" component={ChatContainer} />
-  <Route path="/join" component={Join} />
-  <Route path="/register" component={Register} />
-  <Route path="/login" component={Login} />
-  <Route path="/create" component={Create} />
+  <Redirect from="/" to="welcome" />
+  <Route path="welcome" component={WelcomePage} />
+  <Route path="chat" component={ChatContainer} />
+  <Route path="join" component={Join} />
+  <Route path="register" component={Register} />
+  <Route path="login" component={Login} />
+  <Route path="create" component={Create} />
 </Route>;
 
 /* Rendering */

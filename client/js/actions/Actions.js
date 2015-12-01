@@ -7,10 +7,10 @@ export function addMessage(message) {
   };
 }
 
-export function joinRoom() {
+export function joinRoom(roomCode) {
   return {
     types: ['JOINING_ROOM', 'JOINING_ROOM_SUCCESS', 'JOINING_ROOM_FAIL'],
-    promise: UserAPIUtils.joinRoom()
+    promise: UserAPIUtils.joinRoom(roomCode)
   };
 }
 

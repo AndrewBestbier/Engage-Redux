@@ -19,7 +19,6 @@ export const App = React.createClass({
 
 /* Reflux connector */
 function mapStateToProps(state) {
-  console.log(state);
   return {
     authenticated: state.user.get('authenticated')
   };
