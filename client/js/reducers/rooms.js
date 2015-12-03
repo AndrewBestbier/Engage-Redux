@@ -1,6 +1,4 @@
 import {Map, List} from 'immutable';
-import history from '../utils/history'
-
 
 const initialState = Map({
   currentRoom: null
@@ -11,10 +9,11 @@ export default function(state = initialState, action) {
   case 'JOINING_ROOM':
     return state;
   case 'JOINING_ROOM_SUCCESS':
-    history.replaceState(null, '/chat')
-    return state.set('currentRoom', 'andrew')
+    console.log("succ");
+    console.log(action);
+    return state.set('currentRoom', action.data[0]._id)
   case 'JOINING_ROOM_FAIL':
-    alert('failed');
+    console.log('failed');
     return state;
   case 'CREATING_ROOM':
     return state;

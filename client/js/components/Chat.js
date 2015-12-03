@@ -15,7 +15,7 @@ export default class Chat extends Component {
   componentDidMount() {
     this.socket = io.connect();
 
-    this.socket.emit('subscribe', 'roomOne');
+    this.socket.emit('subscribe', this.props.currentRoom);
 
     const { actions } = this.props;
 
@@ -44,7 +44,9 @@ export default class Chat extends Component {
       time: strftime('%H:%M %p', new Date())
     };
 
-    this.socket.emit('new message', { room: 'roomOne', message: newMessage });
+    console.log("submit", this.props.currentRoom);
+
+    this.socket.emit('new message', { room: this.props.currentRoom, message: newMessage });
 
     this.setState({showModal: false, text: ''})
   }

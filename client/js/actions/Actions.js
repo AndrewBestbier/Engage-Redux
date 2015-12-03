@@ -1,4 +1,5 @@
-import * as UserAPIUtils from '../utils/UserAPIUtils';
+import {customPost, customGet} from '../utils/customFetch';
+import history from '../utils/history'
 
 export function addMessage(message) {
   return {
@@ -8,43 +9,77 @@ export function addMessage(message) {
 }
 
 export function joinRoom(roomCode) {
+  return function(dispatch) {
+    customGet('/api/rooms/'+roomCode)
+      .then(function(data) {
+        //dispatch(userLoggedIn(data));
+        if(data.length === 0){
+          throw new Error('Cannot find a room with that code');
+        } else {
+          dispatch(joinRoomSuccess(data));
+          history.replaceState(null, '/chat')
+        }
+      })
+      .catch(function(ex) {
+        console.log(ex);
+      });
+  };
+}
+
+function joinRoomSuccess(data) {
   return {
-    types: ['JOINING_ROOM', 'JOINING_ROOM_SUCCESS', 'JOINING_ROOM_FAIL'],
-    promise: UserAPIUtils.joinRoom(roomCode)
+    type: 'JOINING_ROOM_SUCCESS',
+    data: data
   };
 }
 
 export function createRoom(room) {
-  return {
-    types: ['CREATING_ROOM', 'CREATE_ROOM_SUCCESS', 'CREATE_ROOM_FAIL'],
-    promise: UserAPIUtils.createRoom(room)
-  };
-}
-
-
-export function signIn(user) {
-  return {
-    types: ['AUTH_SIGNIN',
-      'AUTH_SIGNIN_SUCCESS',
-      'AUTH_SIGNIN_FAIL'],
-    promise: UserAPIUtils.signIn(user)
+  return function(dispatch) {
+    customPost('/api/rooms/new_room', room)
+      .then(function(data) {
+        //dispatch(userLoggedIn(data));
+        console.log(data);
+      })
+      .catch(function(ex) {
+        console.log(ex);
+      });
   };
 }
 
 export function signUp(user) {
-  return {
-    types: ['AUTH_SIGNUP',
-      'AUTH_SIGNUP_SUCCESS',
-      'AUTH_SIGNUP_FAIL'],
-    promise: UserAPIUtils.signUp(user)
+  return function(dispatch) {
+    customPost('/api/sign_up', user)
+      .then(function(data) {
+        console.log(data);
+      })
+      .catch(function(ex) {
+        console.log(ex);
+      });
   };
 }
 
-export function signOut(user) {
-  return {
-    types: ['AUTH_SIGNOUT',
-      'AUTH_SIGNOUT_SUCCESS',
-      'AUTH_SIGNOUT_FAIL'],
-    promise: UserAPIUtils.signOut(user)
+export function signIn(user) {
+  return function(dispatch) {
+    customPost('/api/sign_in', user)
+      .then(function(data) {
+        console.log(data);
+      })
+      .catch(function(ex) {
+        console.log(ex);
+      });
+  };
+}
+
+
+export function signOut() {
+  return function(dispatch) {
+    customGet('/api/signout/'+roomCode)
+      .then(function(data) {
+        console.log(data);
+        }
+      })
+      .catch(function(ex) {
+        console.log(ex);
+      });
   };
 }

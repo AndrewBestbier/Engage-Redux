@@ -2,15 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import * as Actions from '../actions/Actions';
 import {Button, Modal, Input, Panel} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { updatePath } from 'redux-simple-router'
 
 class Join extends Component {
 
   handleSubmit(event) {
     const { dispatch } = this.props;
     const dangerouslyHardcodedRoomCode = '41lIMsIEg';
-
-    dispatch(Actions.joinRoom(dangerouslyHardcodedRoomCode))
+    dispatch(Actions.joinRoom(dangerouslyHardcodedRoomCode));
   }
 
   render() {
@@ -23,10 +21,4 @@ class Join extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-      messages: state.messages.data,
-  }
-}
-
-export default connect(mapStateToProps)(Join);
+export default connect()(Join);

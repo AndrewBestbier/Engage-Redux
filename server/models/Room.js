@@ -4,7 +4,7 @@ var shortid = require('shortid');
 var mongoose = require('mongoose');
 
 var roomSchema = mongoose.Schema({
-  name: { type: String, unique: true },
+  name: String,
   _id: {
     type: String,
     unique: true,

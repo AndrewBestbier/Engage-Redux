@@ -10,13 +10,10 @@ class Create extends Component {
     const { dispatch } = this.props;
 
     let room = {
-      name: 'Andrew',
+      name: 'Andrew Donal Bestbier',
     }
 
-    dispatch(Actions.createRoom(room)).then(() => {
-      //this.context.router.transitionTo('/chat');
-      console.log("created room");
-    });
+    dispatch(Actions.createRoom(room));
   }
 
   render() {

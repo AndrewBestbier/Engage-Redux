@@ -9,7 +9,7 @@ class Register extends Component {
     const { dispatch } = this.props;
 
     const userObj = {
-      username: 'andy',
+      username: 'andybest',
       password: 'password'
     };
 
@@ -27,10 +27,4 @@ class Register extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-      messages: state.messages.data,
-  }
-}
-
-export default connect(mapStateToProps)(Register);
+export default connect()(Register);

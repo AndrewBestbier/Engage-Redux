@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/Actions';
 import { Input, Button } from 'react-bootstrap';
 
-export default class Login extends Component {
-
+class Login extends Component {
 
   handleSubmit(event) {
     const { dispatch } = this.props;
@@ -14,10 +13,7 @@ export default class Login extends Component {
       password: 'password',
       confirmPassword: 'password'
     };
-
-    dispatch(Actions.signUp(userObj)).then(() => {
-      this.context.router.transitionTo('/chat');
-    });
+    dispatch(Actions.signIn(userObj));
   }
 
   render() {
@@ -28,3 +24,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default connect()(Login);
