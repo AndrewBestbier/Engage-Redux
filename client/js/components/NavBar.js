@@ -5,38 +5,50 @@ import _ from 'lodash';
 export default class NavBar extends Component {
 
   getHeaderLinks() {
-    var universalLinks = [<NavItem eventKey={1} href="#welcome">Welcome</NavItem>];
+    var universalLinks = [<li><a href="#welcome"><span className="tm-label">Welcome</span></a></li>];
     var authenticatedLinks = [
-      <NavItem eventKey={2} href="#chat">Chat</NavItem>,
-      <NavItem eventKey={3} href="#welcome">Create</NavItem>,
-      <NavItem eventKey={4} href="#join">Join</NavItem>,
-      <NavItem eventKey={5} href="#welcome">Logout</NavItem>
+      <li><a href="#chat"><span className="tm-label">Chat</span></a></li>,
+      <li><a href="#create"><span className="tm-label">Create</span></a></li>,
+      <li><a href="#join"><span className="tm-label">Join</span></a></li>,
+      <li><a href="#welcome"><span className="tm-label">Logout</span></a></li>
     ];
     var unAuthenticatedLinks = [
-      <NavItem eventKey={2} href="#login">Login</NavItem>,
-      <NavItem eventKey={3} href="#register">Register</NavItem>
+      <li><a href="#login"><span className="tm-label">Login</span></a></li>,
+      <li><a href="#register"><span className="tm-label">Register</span></a></li>
     ];
 
     if (this.props.authenticated) {
       return _.union(universalLinks, authenticatedLinks);
     } else {
-      return _.union(universalLinks, unAuthenticatedLinks);
+      //return _.union(universalLinks, unAuthenticatedLinks);
+      return _.union(universalLinks, authenticatedLinks);
     }
   }
 
   render() {
 
     return (
-      <Navbar inverse>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#">Engage</a>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-          {this.getHeaderLinks()}
-        </Nav>
-      </Navbar>
+      <header id="header" className="clearfix" data-current-skin="blue">
+        <ul className="header-inner">
+            <li id="menu-trigger" data-trigger="#sidebar">
+                <div className="line-wrap">
+                    <div className="line top"></div>
+                    <div className="line center"></div>
+                    <div className="line bottom"></div>
+                </div>
+            </li>
+
+            <li className="logo hidden-xs">
+                <a href="index.html">Material Admin</a>
+            </li>
+
+            <li className="pull-right">
+                <ul className="top-menu">
+                    {this.getHeaderLinks()}
+                </ul>
+            </li>
+        </ul>
+      </header>
     );
   }
 }

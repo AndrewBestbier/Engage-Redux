@@ -1,5 +1,6 @@
 /* Non-component Imports */
-import './css/bootstrap.min.css';
+import './css/material1.css';
+import './css/material2.css';
 import './css/main.css';
 import React from 'react';
 import history from './js/utils/history'

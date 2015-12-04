@@ -13,6 +13,7 @@ export function joinRoom(roomCode) {
     customGet('/api/rooms/'+roomCode)
       .then(function(data) {
         //dispatch(userLoggedIn(data));
+        console.log("data");
         if(data.length === 0){
           throw new Error('Cannot find a room with that code');
         } else {
@@ -76,7 +77,6 @@ export function signOut() {
     customGet('/api/signout/'+roomCode)
       .then(function(data) {
         console.log(data);
-        }
       })
       .catch(function(ex) {
         console.log(ex);
