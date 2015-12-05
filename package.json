@@ -68,7 +68,7 @@
     "webpack-dev-middleware": "^1.2.0",
     "webpack-dev-server": "^1.9.0",
     "webpack-hot-middleware": "^2.6.0",
-    "webpack-isomorphic-tools": "^0.8.8"
+    "webpack-isomorphic-tools": "^2.2.21"
   },
   "dependencies": {
     "babel": "^6.1.18",
