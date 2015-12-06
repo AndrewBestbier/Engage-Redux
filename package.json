@@ -50,7 +50,7 @@
     "eslint-config-airbnb": "2.0.0",
     "eslint-plugin-react": "^3.4.0",
     "expect": "^1.10.0",
-    "jsdom": "^6.5.0",
+    "jsdom": "^7.2.0",
     "json-loader": "^0.5.3",
     "mocha": "^2.3.2",
     "mocha-jsdom": "^1.0.0",
