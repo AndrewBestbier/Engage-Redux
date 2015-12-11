@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "babel": "^6.1.18",
-    "babel-plugin-typecheck": "0.0.3",
+    "babel-plugin-typecheck": "3.5.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.13.0",
     "chai-immutable": "^1.5.3",
