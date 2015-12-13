@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as Actions from '../actions/Actions';
+import * as authActions from '../actions/authActions';
 import NavBar from '../components/NavBar';
 
 export const App = React.createClass({
@@ -25,4 +25,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const AppContainer = connect(mapStateToProps, Actions)(App);
+export const AppContainer = connect(mapStateToProps, authActions)(App);
