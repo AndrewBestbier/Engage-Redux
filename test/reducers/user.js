@@ -10,13 +10,15 @@ describe('user', () => {
     const initialState = Map();
 
     const action = {
-      type: 'USER_LOGGED_IN'
+      type: 'USER_LOGGED_IN',
+      data: [{name: 'hello', id: 1}, {name: 'world', id: 2}]
     };
 
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      authenticated: true
+      authenticated: true,
+      createdRooms: [{name: 'hello', id: 1}, {name: 'world', id: 2}]
     }));
   });
 

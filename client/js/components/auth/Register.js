@@ -12,7 +12,7 @@ class Register extends Component {
     const { dispatch } = this.props;
 
     const userObj = {
-      username: 'andybestxxxxx',
+      username: 'andy',
       password: 'password'
     };
 

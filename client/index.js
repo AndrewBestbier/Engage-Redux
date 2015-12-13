@@ -17,7 +17,6 @@ import {AppContainer} from './js/containers/AppContainer';
 import WelcomePage from './js/components/WelcomePage';
 import Join from './js/components/Join';
 import NavBar from './js/components/NavBar';
-import Create from './js/components/Create';
 import Dashboard from './js/components/Dashboard';
 
 /* Auth Component Imports */
@@ -35,7 +34,6 @@ const routes = <Route component={AppContainer}>
   <Route path="join" component={Join} />
   <Route path="register" component={Register} />
   <Route path="login" component={Login} />
-  <Route path="create" component={Create} />
   <Route path="dashboard" component={Dashboard} />
 </Route>;
 

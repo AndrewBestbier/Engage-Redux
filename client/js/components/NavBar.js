@@ -7,7 +7,7 @@ export default class NavBar extends Component {
     var universalLinks = [<li><a href="#welcome"><span className="tm-label">Welcome</span></a></li>];
     var authenticatedLinks = [
       <li><a href="#chat"><span className="tm-label">Chat</span></a></li>,
-      <li><a href="#create"><span className="tm-label">Create</span></a></li>,
+      <li><a href="#dashboard"><span className="tm-label">Dashboard</span></a></li>,
       <li><a href="#join"><span className="tm-label">Join</span></a></li>,
       <li><a onClick={::this.props.logout}><span className="tm-label">Logout</span></a></li>
     ];
@@ -28,16 +28,9 @@ export default class NavBar extends Component {
     return (
       <header id="header" className="clearfix" data-current-skin="blue">
         <ul className="header-inner">
-            <li id="menu-trigger" data-trigger="#sidebar">
-                <div className="line-wrap">
-                    <div className="line top"></div>
-                    <div className="line center"></div>
-                    <div className="line bottom"></div>
-                </div>
-            </li>
 
-            <li className="logo hidden-xs">
-                <a href="index.html">Material Admin</a>
+            <li className="logo">
+                <a href="index.html">Engage</a>
             </li>
 
             <li className="pull-right">
