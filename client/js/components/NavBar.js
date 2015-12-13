@@ -28,16 +28,9 @@ export default class NavBar extends Component {
     return (
       <header id="header" className="clearfix" data-current-skin="blue">
         <ul className="header-inner">
-            <li id="menu-trigger" data-trigger="#sidebar">
-                <div className="line-wrap">
-                    <div className="line top"></div>
-                    <div className="line center"></div>
-                    <div className="line bottom"></div>
-                </div>
-            </li>
 
-            <li className="logo hidden-xs">
-                <a href="index.html">Material Admin</a>
+            <li className="logo">
+                <a href="index.html">Engage</a>
             </li>
 
             <li className="pull-right">

@@ -5,6 +5,7 @@ module.exports = function(router) {
   router.use(bodyparser.json());
 
   router.get('/join_room', function(req, res) {
+    console.log(req.user);
     res.json('Hello Andrewx');
   });
 
@@ -34,14 +35,21 @@ module.exports = function(router) {
 
   //Create a new Room
   router.post('/rooms/new_room', function(req, res) {
-    var newRoom = new Room(req.body);
+
+    if(!req.user){
+      return res.status(500).json({msg: 'User not logged in'});
+    }
+
+    var newRoom = new Room({
+      name: req.body.name,
+      _creator: req.user._id
+    });
 
     newRoom.save(function (err, data) {
       if(err) {
         console.log(err);
         return res.status(500).json({msg: 'internal server error'});
       }
-
       res.json(data);
     });
   });

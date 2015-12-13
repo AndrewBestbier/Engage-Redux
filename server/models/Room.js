@@ -9,7 +9,8 @@ var roomSchema = mongoose.Schema({
     type: String,
     unique: true,
     'default': shortid.generate
-},
+  },
+  _creator : { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 module.exports = mongoose.model('Room', roomSchema);

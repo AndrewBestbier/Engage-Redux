@@ -2,6 +2,7 @@
 
 var bodyparser = require('body-parser');
 var User = require('../models/User.js');
+var Room = require('../models/Room.js');
 
 module.exports = function loadUserRoutes(router, passport) {
   router.use(bodyparser.json());
@@ -11,7 +12,12 @@ module.exports = function loadUserRoutes(router, passport) {
   });
 
   router.post('/login', passport.authenticate('local-login'), function(req, res) {
-    res.json(req.user);
+    Room
+    .find({ _creator: req.user._id })
+    .exec(function (err, rooms) {
+      if (err) return handleError(err);
+      res.json(rooms);
+    })
   });
 
   router.get('/logout', function(req, res) {
@@ -21,7 +27,17 @@ module.exports = function loadUserRoutes(router, passport) {
 
   //get auth credentials from server
   router.get('/load_auth_into_state', function(req, res) {
-    res.json(req.user);
+
+    if(!req.user){
+      return res.status(500).json({msg: 'User not logged in'});
+    }
+
+    Room
+    .find({ _creator: req.user._id })
+    .exec(function (err, rooms) {
+      if (err) return handleError(err);
+      res.json(rooms);
+    })
   });
 
   // get usernames for validating whether a username is available

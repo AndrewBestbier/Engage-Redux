@@ -36,11 +36,17 @@ export function createRoom(room) {
   return function(dispatch) {
     customPost('/api/rooms/new_room', room)
       .then(function(data) {
-        //dispatch(userLoggedIn(data));
-        console.log(data);
+        dispatch(createRoomSuccess(data));
       })
       .catch(function(ex) {
         console.log(ex);
       });
+  };
+}
+
+function createRoomSuccess(data) {
+  return {
+    type: 'CREATE_ROOM_SUCCESS',
+    data: data
   };
 }

@@ -7,32 +7,10 @@ var UserSchema = mongoose.Schema({
     password: String,
     email: String,
   },
-  facebook: {
-    id: String,
-    username: String,
-    token: String,
-    email: String,
-  }
+  createdRooms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Room' }]
 });
 
-// stashed async methods
-// UserSchema.methods.generateHash = function generateHash(password, callback) {
-//   bcrypt.genSalt(8, function(err, salt) {
-//     bcrypt.hash(password, salt, null, function saveHashedPassword(err, hash) {
-//       if (err) throw err;
-//       callback(hash);
-//     });
-//   });
-// };
-//
-// UserSchema.methods.checkPassword = function(password, cb) {
-// 	bcrypt.compare(password, this.password, function(err, response) {
-// 		if (err) {
-// 			return cb(err);
-// 		}
-// 		cb(null, response);
-// 	});
-// };
+
 UserSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
