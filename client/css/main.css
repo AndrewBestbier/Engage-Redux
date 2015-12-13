@@ -1,4 +1,12 @@
 body{
-  background-color: #eee;
-  padding-top: 90px;
+  background-color: #EEEEEE;
+  font-family: 'Montserrat',sans-serif;
+}
+
+/* To match Khan Academy */
+.panel-defalt {
+  transition-duration: .2s;
+}
+.panel-default:hover {
+  border: 1px solid #46a8bf;
 }

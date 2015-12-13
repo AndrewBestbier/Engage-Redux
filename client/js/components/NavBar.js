@@ -5,50 +5,44 @@ import _ from 'lodash';
 export default class NavBar extends Component {
 
   getHeaderLinks() {
-    var universalLinks = [<li><a href="#welcome"><span className="tm-label">Welcome</span></a></li>];
+    var universalLinks = [<a href="#welcome" className="home-link ellipsis">Welcome</a>];
     var authenticatedLinks = [
-      <li><a href="#chat"><span className="tm-label">Chat</span></a></li>,
-      <li><a href="#create"><span className="tm-label">Create</span></a></li>,
-      <li><a href="#join"><span className="tm-label">Join</span></a></li>,
-      <li><a href="#welcome"><span className="tm-label">Logout</span></a></li>
+      <a href="#chat" className="home-link ellipsis">Chat</a>,
+      <a href="#create" className="home-link ellipsis">Create</a>,
+      <a href="#join" className="home-link ellipsis">Join</a>,
+      <a href="#welcome" className="home-link ellipsis">Logout</a>
     ];
     var unAuthenticatedLinks = [
-      <li><a href="#login"><span className="tm-label">Login</span></a></li>,
-      <li><a href="#register"><span className="tm-label">Register</span></a></li>
+      <a href="#login" className="home-link ellipsis">Login</a>,
+      <a href="#register" className="home-link ellipsis">Register</a>
     ];
 
     if (this.props.authenticated) {
       return _.union(universalLinks, authenticatedLinks);
     } else {
-      //return _.union(universalLinks, unAuthenticatedLinks);
-      return _.union(universalLinks, authenticatedLinks);
+      return _.union(universalLinks, unAuthenticatedLinks);
+      //return _.union(universalLinks, authenticatedLinks);
     }
   }
 
   render() {
 
     return (
-      <header id="header" className="clearfix" data-current-skin="blue">
-        <ul className="header-inner">
-            <li id="menu-trigger" data-trigger="#sidebar">
-                <div className="line-wrap">
-                    <div className="line top"></div>
-                    <div className="line center"></div>
-                    <div className="line bottom"></div>
-                </div>
-            </li>
 
-            <li className="logo hidden-xs">
-                <a href="index.html">Material Admin</a>
-            </li>
 
-            <li className="pull-right">
-                <ul className="top-menu">
-                    {this.getHeaderLinks()}
-                </ul>
-            </li>
-        </ul>
-      </header>
+      <div id="top-header-container" className="clearfix athena-big-menu profile-header-scroll" style={{top: 0}}>
+        <div id="top-header" className="new">
+        <nav className="sitewide-navigation" role="navigation">
+            <span className="links nav-subheader">
+                <a id="header-logo" href="/" className="nav-link no-menu show-demo-dialog" data-tag="Header" aria-label="Khan Academy"><span className="logotype" aria-hidden="true"><span className="logotype-khan">Engage</span></span></a>
+            </span>
+        </nav>
+        <span id="page_auth" className="pure-hidden-xs pure-hidden-sm">
+          {this.getHeaderLinks()}
+        </span>
+      </div>
+      </div>
+
     );
   }
 }

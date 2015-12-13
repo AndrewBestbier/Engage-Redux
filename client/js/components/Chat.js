@@ -58,7 +58,6 @@ export default class Chat extends Component {
 
     return (
       <div>
-        <h2>{this.props.currentRoom}</h2>
         <div className='container'><div className='row'>{filteredMessages}</div></div>
 
         <Button bsStyle="primary" onClick={::this.open}>Ask</Button>

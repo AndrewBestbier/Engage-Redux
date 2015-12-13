@@ -20,7 +20,8 @@ export const App = React.createClass({
 /* Reflux connector */
 function mapStateToProps(state) {
   return {
-    authenticated: state.user.get('authenticated')
+    authenticated: state.user.get('authenticated'),
+    currentRoom: state.rooms.get('currentRoom')
   };
 }
 
