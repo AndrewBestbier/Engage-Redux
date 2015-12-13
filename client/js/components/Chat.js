@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Button, Modal, Input, Panel} from 'react-bootstrap';
 import strftime from 'strftime';
+import Card from './Card';
 
 export default class Chat extends Component {
 
@@ -53,11 +54,10 @@ export default class Chat extends Component {
 
   render() {
 
-    const filteredMessages = this.props.messages.map(message => <div className='col-md-12'><Panel>{message}</Panel></div>);
+    const filteredMessages = this.props.messages.map(message => <Card mainText={message} />);
 
     return (
       <div>
-        <h2>{this.props.currentRoom}</h2>
         <div className='container'><div className='row'>{filteredMessages}</div></div>
 
         <Button bsStyle="primary" onClick={::this.open}>Ask</Button>

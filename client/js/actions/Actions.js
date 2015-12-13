@@ -12,7 +12,6 @@ export function joinRoom(roomCode) {
   return function(dispatch) {
     customGet('/api/rooms/'+roomCode)
       .then(function(data) {
-        //dispatch(userLoggedIn(data));
         if(data.length === 0){
           throw new Error('Cannot find a room with that code');
         } else {
@@ -39,44 +38,6 @@ export function createRoom(room) {
       .then(function(data) {
         //dispatch(userLoggedIn(data));
         console.log(data);
-      })
-      .catch(function(ex) {
-        console.log(ex);
-      });
-  };
-}
-
-export function signUp(user) {
-  return function(dispatch) {
-    customPost('/api/sign_up', user)
-      .then(function(data) {
-        console.log(data);
-      })
-      .catch(function(ex) {
-        console.log(ex);
-      });
-  };
-}
-
-export function signIn(user) {
-  return function(dispatch) {
-    customPost('/api/sign_in', user)
-      .then(function(data) {
-        console.log(data);
-      })
-      .catch(function(ex) {
-        console.log(ex);
-      });
-  };
-}
-
-
-export function signOut() {
-  return function(dispatch) {
-    customGet('/api/signout/'+roomCode)
-      .then(function(data) {
-        console.log(data);
-        }
       })
       .catch(function(ex) {
         console.log(ex);

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as Actions from '../actions/Actions';
+import * as authActions from '../actions/authActions';
 import NavBar from '../components/NavBar';
 
 export const App = React.createClass({
@@ -20,8 +20,9 @@ export const App = React.createClass({
 /* Reflux connector */
 function mapStateToProps(state) {
   return {
-    authenticated: state.user.get('authenticated')
+    authenticated: state.user.get('authenticated'),
+    currentRoom: state.rooms.get('currentRoom')
   };
 }
 
-export const AppContainer = connect(mapStateToProps, Actions)(App);
+export const AppContainer = connect(mapStateToProps, authActions)(App);

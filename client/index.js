@@ -1,6 +1,9 @@
-/* Non-component Imports */
-import './css/bootstrap.min.css';
+/* Css Imports */
+import './css/material1.min.css';
+import './css/material2.min.css';
 import './css/main.css';
+
+/* Non-component Imports */
 import React from 'react';
 import history from './js/utils/history'
 import ReactDOM from 'react-dom';
@@ -14,9 +17,12 @@ import {AppContainer} from './js/containers/AppContainer';
 import WelcomePage from './js/components/WelcomePage';
 import Join from './js/components/Join';
 import NavBar from './js/components/NavBar';
-import Register from './js/components/Register';
-import Login from './js/components/Login';
 import Create from './js/components/Create';
+import Dashboard from './js/components/Dashboard';
+
+/* Auth Component Imports */
+import Register from './js/components/auth/Register';
+import Login from './js/components/auth/Login';
 
 //Initialising
 const store = configureStore();
@@ -30,6 +36,7 @@ const routes = <Route component={AppContainer}>
   <Route path="register" component={Register} />
   <Route path="login" component={Login} />
   <Route path="create" component={Create} />
+  <Route path="dashboard" component={Dashboard} />
 </Route>;
 
 /* Rendering */

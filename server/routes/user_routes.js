@@ -6,17 +6,17 @@ var User = require('../models/User.js');
 module.exports = function loadUserRoutes(router, passport) {
   router.use(bodyparser.json());
 
-  router.post('/sign_up', passport.authenticate('local-signup'), function(req, res) {
+  router.post('/register', passport.authenticate('local-register'), function(req, res) {
     res.json(req.user);
   });
 
-  router.post('/sign_in', passport.authenticate('local-login'), function(req, res) {
+  router.post('/login', passport.authenticate('local-login'), function(req, res) {
     res.json(req.user);
   });
 
-  router.get('/signout', function(req, res) {
+  router.get('/logout', function(req, res) {
     req.logout();
-    res.end();
+    res.send( { message: 'Successfully logged out' } );
   });
 
   //get auth credentials from server
