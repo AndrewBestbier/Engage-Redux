@@ -15,13 +15,13 @@ export default class Chat extends Component {
 
   componentDidMount() {
     this.socket = io.connect();
-
+    const { dispatch } = this.props;
     this.socket.emit('subscribe', this.props.currentRoom);
 
     const { actions } = this.props;
 
     this.socket.on('backchannel', message =>
-      actions.addMessage(message.message)
+      dispatch(this.props.actions.addMessage(message))
     );
   }
 
@@ -45,12 +45,7 @@ export default class Chat extends Component {
       text: this.state.text,
       roomId: this.props.currentRoom
     };
-
-    //this.socket.emit('new message', { room: this.props.currentRoom, message: newMessage });
-
-
-    dispatch(this.props.actions.submitMessage(newMessage));
-
+    dispatch(this.props.actions.submitMessage(newMessage, this.socket));
     this.setState({showModal: false, text: ''})
   }
 

@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 export default class Card extends Component {
 
-
   render() {
     return (
       <div className="panel panel-default" key={this.props.message.get('_id')}>

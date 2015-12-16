@@ -1,14 +1,20 @@
 import {customPost, customGet} from '../utils/customFetch';
 import history from '../utils/history'
 
-export function submitMessage(message) {
+export function submitMessage(message, socket) {
   return function(dispatch) {
+    //Optimistic Update here. If the Post fails, this is reverted.
+    dispatch(addMessage(message));
+
+    //Then Post the message to be written in our database.
     customPost('/api/messages', message)
       .then(function(data) {
-        dispatch(addMessage(data));
+        //Now that the Post was successful, we can broadcast this message to all other users in the room
+        socket.emit('new message', data);
       })
       .catch(function(ex) {
         console.log(ex);
+        //Revert this previous message here.
       });
   };
 }
