@@ -6,8 +6,7 @@ var UserSchema = mongoose.Schema({
     username: { type: String, unique: true },
     password: String,
     email: String,
-  },
-  createdRooms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Room' }]
+  }
 });
 
 

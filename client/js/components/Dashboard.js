@@ -59,7 +59,7 @@ class Dashboard extends Component {
               <div className="row">
 
                 {::this.getCreatedRooms().map(createdRoom =>
-                  <div className="col-sm-4" onClick={this.joinCreatedRoom.bind(this, createdRoom)}>
+                  <div className="col-sm-4" key={createdRoom.get('_id')} onClick={this.joinCreatedRoom.bind(this, createdRoom)}>
                     <div className="card">
                         <div className="card-header bgm-cyan">
                             <h2>{createdRoom.get('name')}</h2>

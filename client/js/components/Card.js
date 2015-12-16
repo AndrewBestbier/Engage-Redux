@@ -5,7 +5,7 @@ export default class Card extends Component {
 
   render() {
     return (
-      <div className="panel panel-default">
+      <div className="panel panel-default" key={this.props.message.get('_id')}>
         <div className="panel-body">
           <div className="panel-heading">
             <div className="btn-group pull-right">
@@ -13,7 +13,7 @@ export default class Card extends Component {
               <a href="#" className="btn btn-default btn-xs">## Delete</a>
               <a href="#" className="btn btn-default btn-xs">## Move</a>
             </div>
-            <h4 className="panel-title">Correct Heading</h4>
+            <h4 className="panel-title">{this.props.message.get('text')}</h4>
           </div>
         </div>
       </div>

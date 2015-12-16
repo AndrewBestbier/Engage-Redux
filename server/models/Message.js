@@ -4,10 +4,8 @@ var mongoose = require('mongoose');
 
 var messageSchema = mongoose.Schema({
   id: String,
-  roomID: String,
   text: String,
-  user: String,
-  time: String
+  roomId : String
 });
 
 module.exports = mongoose.model('Message', messageSchema);
