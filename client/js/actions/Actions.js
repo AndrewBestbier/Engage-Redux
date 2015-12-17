@@ -1,34 +1,56 @@
 import {customPost, customGet} from '../utils/customFetch';
 import history from '../utils/history'
 
+export function submitMessage(message, socket) {
+  return function(dispatch) {
+    //Optimistic Update here. If the Post fails, this is reverted.
+    dispatch(addMessage(message));
+
+    //Then Post the message to be written in our database.
+    customPost('/api/messages', message)
+      .then(function(data) {
+        //Now that the Post was successful, we can broadcast this message to all other users in the room
+        socket.emit('new message', data);
+      })
+      .catch(function(ex) {
+        console.log(ex);
+        //Revert this previous message here.
+      });
+  };
+}
+
 export function addMessage(message) {
   return {
     type: 'RECEIVE_MESSAGE',
-    message
+    data: message
   };
 }
+
+export function leaveRoom() {
+  return {
+    type: 'LEFT_ROOM'
+  };
+}
+
 
 export function joinRoom(roomCode) {
   return function(dispatch) {
     customGet('/api/rooms/'+roomCode)
       .then(function(data) {
-        if(data.length === 0){
-          throw new Error('Cannot find a room with that code');
-        } else {
-          dispatch(joinRoomSuccess(data));
-          history.replaceState(null, '/chat')
-        }
+        dispatch(joinRoomSuccess(data, roomCode));
+        history.replaceState(null, '/chat')
       })
       .catch(function(ex) {
-        console.log(ex);
+        console.log(ex); //Room does not exist
       });
   };
 }
 
-function joinRoomSuccess(data) {
+function joinRoomSuccess(data, roomCode) {
   return {
     type: 'JOINING_ROOM_SUCCESS',
-    data: data
+    data: data,
+    roomCode: roomCode
   };
 }
 

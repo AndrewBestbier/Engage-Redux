@@ -15,14 +15,18 @@ export default class Chat extends Component {
 
   componentDidMount() {
     this.socket = io.connect();
-
+    const { dispatch } = this.props;
     this.socket.emit('subscribe', this.props.currentRoom);
 
-    const { actions } = this.props;
-
     this.socket.on('backchannel', message =>
-      actions.addMessage(message.message)
+      dispatch(this.props.actions.addMessage(message))
     );
+  }
+
+  componentWillUnmount(){
+    this.socket.emit('unsubscribe', this.props.currentRoom); //Doesn't work currently
+    const { dispatch } = this.props;
+    dispatch(this.props.actions.leaveRoom());
   }
 
   close() {
@@ -38,23 +42,20 @@ export default class Chat extends Component {
   }
 
   handleSubmit(){
+    const { dispatch } = this.props;
 
     let newMessage = {
       id: Date.now(),
       text: this.state.text,
-      time: strftime('%H:%M %p', new Date())
+      roomId: this.props.currentRoom
     };
-
-    console.log("submit", this.props.currentRoom);
-
-    this.socket.emit('new message', { room: this.props.currentRoom, message: newMessage });
-
+    dispatch(this.props.actions.submitMessage(newMessage, this.socket));
     this.setState({showModal: false, text: ''})
   }
 
   render() {
 
-    const filteredMessages = this.props.messages.map(message => <Card mainText={message} />);
+    const filteredMessages = this.props.messages.map(message => <Card message={message} />);
 
     return (
       <div>

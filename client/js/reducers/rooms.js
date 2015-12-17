@@ -1,26 +1,20 @@
-import {Map, List} from 'immutable';
+import {Map, List, fromJS} from 'immutable';
 
 const initialState = Map({
-  currentRoom: null
+  currentRoom: null,
+  createdRooms: List()
 })
 
 export default function(state = initialState, action) {
   switch (action.type) {
-  case 'JOINING_ROOM':
-    return state;
   case 'JOINING_ROOM_SUCCESS':
-    console.log("succ");
-    console.log(action);
-    return state.set('currentRoom', action.data[0]._id)
-  case 'JOINING_ROOM_FAIL':
-    console.log('failed');
-    return state;
-  case 'CREATING_ROOM':
-    return state;
+    return state.set('currentRoom', action.roomCode)
   case 'CREATE_ROOM_SUCCESS':
-    return state;
-  case 'CREATE_ROOM_FAIL':
-    return state;
+    return state.update('createdRooms', createdRooms => createdRooms.push(fromJS(action.data)));
+  case 'USER_LOGGED_IN':
+    return state.set('createdRooms', fromJS(action.data));
+  case 'LEFT_ROOM':
+    return state.set('currentRoom', null);
   default:
     return state;
   }

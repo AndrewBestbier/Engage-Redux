@@ -1,4 +1,5 @@
 var Room = require('../models/Room');
+var Message = require('../models/Message');
 var bodyparser = require('body-parser');
 
 module.exports = function(router) {
@@ -24,12 +25,16 @@ module.exports = function(router) {
   router.get('/rooms/:id', function(req, res) {
 
     Room.find({_id: req.params.id}, function(err, data) {
-      if(err) {
-        console.log(err);
-        return res.status(500).json({msg: 'internal server error'});
+      if(err || data.length === 0) {
+        return res.status(500).json({msg: 'Room not found'});
       }
 
-      res.json(data)
+      Message.find({roomId: req.params.id}, function(err, data) {
+        if(err) {
+          return res.status(500).json({msg: 'Room not found'});
+        }
+        res.json(data);
+      });
     })
   })
 

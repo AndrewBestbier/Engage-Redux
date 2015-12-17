@@ -4,16 +4,16 @@ import _ from 'lodash';
 export default class NavBar extends Component {
 
   getHeaderLinks() {
-    var universalLinks = [<li><a href="#welcome"><span className="tm-label">Welcome</span></a></li>];
+    var universalLinks = [<li key="welcome"><a href="#welcome"><span className="tm-label">Welcome</span></a></li>];
     var authenticatedLinks = [
-      <li><a href="#chat"><span className="tm-label">Chat</span></a></li>,
-      <li><a href="#dashboard"><span className="tm-label">Dashboard</span></a></li>,
-      <li><a href="#join"><span className="tm-label">Join</span></a></li>,
-      <li><a onClick={::this.props.logout}><span className="tm-label">Logout</span></a></li>
+      <li key="chat"><a href="#chat"><span className="tm-label">Chat</span></a></li>,
+      <li key="dashboard"><a href="#dashboard"><span className="tm-label">Dashboard</span></a></li>,
+      <li key="join"><a href="#join"><span className="tm-label">Join</span></a></li>,
+      <li key="logout"><a onClick={::this.props.logout}><span className="tm-label">Logout</span></a></li>
     ];
     var unAuthenticatedLinks = [
-      <li><a href="#login"><span className="tm-label">Login</span></a></li>,
-      <li><a href="#register"><span className="tm-label">Register</span></a></li>
+      <li key="login"><a href="#login"><span className="tm-label">Login</span></a></li>,
+      <li key="register"><a href="#register"><span className="tm-label">Register</span></a></li>
     ];
 
     if (this.props.authenticated) {
