@@ -8,8 +8,7 @@ var User = require("../../../server/models/User");
 var Message = require("../../../server/models/Message");
 var server = require('../../../server');
 
-describe('Rooms', () => {
-
+describe('Messages', () => {
   /* The authenticated user that will later be used */
   var registeredAgent = request.agent(server);
 
@@ -26,50 +25,46 @@ describe('Rooms', () => {
     registeredAgent
       .post('/api/register')
       .send({username: 'test@test.com', password: 'password'})
-      .end(function (err, res) {
-        done();
-    });
+      .end(function() {
+        /* Nested Callback */
+        registeredAgent
+          .post('/api/rooms')
+          .send({name: 'Example Room'})
+          .end(function(err, res) {
+            /* Populating the testRoomId to be found in subsequent tests */
+            testRoomId = res.body._id;
+            done();
+          });
+      });
   });
 
   /*
-    Name: Creating a Room
+    Name: Creating a message
     Type: POST
-    Url: /api/rooms/
+    Url: /api/messages/
    */
-  it('should not be able to create a room if not authenticated', function(done) {
-    request(server) /* Note the request(server) here, not registeredAgent */
-      .post('/api/rooms')
-      .send({name: 'Example Room'})
-      .expect(500, done)
-  });
+  it('will create a new message in the database', function(done){
 
-  it('should be able to create a room if authenticated', function(done) {
-    registeredAgent /* Note the registeredAgent here (Registered) */
-      .post('/api/rooms')
-      .send({name: 'Example Room'})
-      .expect(200)
+    registeredAgent
+      .post('/api/messages')
+      .send({text: 'Example Message', roomId: testRoomId})
       .end(function(err, res) {
-        expect(res.body.name).to.equal('Example Room');
-        /* Populating the testRoomId to be found in subsequent tests */
-        testRoomId = res.body._id;
+        expect(res.body.text).to.equal('Example Message')
         done();
       });
   });
 
   /*
-    Name: Getting an individual Room
+    Name: Getting a room's questions
     Type: GET
     Url: /api/rooms/:id
    */
-  it('should not find the room as it does not exist', function(done) {
-    request(server)
-      .get('/api/rooms/' + 'fake room id')
-      .expect(500, done);
-  });
-
-  it('should find the room if it does exist', function(done) {
+  it('should find the newly added message in the room', function(done) {
     request(server)
       .get('/api/rooms/' + testRoomId)
-      .expect(200, done);
+      .end(function(err, res) {
+        expect(res.body.length).to.equal(1);
+        done();
+      });
   });
 });

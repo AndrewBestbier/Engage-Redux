@@ -34,7 +34,7 @@ module.exports = function loadUserRoutes(router, passport) {
       return res.status(500).json({msg: 'User not logged in'});
     }
 
-    re.json(req.user);
+    res.json(req.user);
   });
 
 };

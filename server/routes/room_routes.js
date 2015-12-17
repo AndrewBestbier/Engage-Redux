@@ -11,7 +11,7 @@ module.exports = function(router) {
     res.json('Hello Andrewx');
   }); */
 
-  //Get all the rooms in Engage
+  /* Currently Unused
   router.get('/rooms', function(req, res) {
     Room.find({},{name: 1, id:1, _id:0}, function(err, data) {
       if(err) {
@@ -19,7 +19,7 @@ module.exports = function(router) {
       }
       res.json(data);
     });
-  });
+  }); */
 
   // get a specific channel
   router.get('/rooms/:id', function(req, res) {

@@ -45,7 +45,6 @@ export default class Chat extends Component {
     const { dispatch } = this.props;
 
     let newMessage = {
-      id: Date.now(),
       text: this.state.text,
       roomId: this.props.currentRoom
     };
