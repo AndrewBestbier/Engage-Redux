@@ -1,5 +1,3 @@
-/* I just copied this code and don't fully understand it. It's so we can setup a DOM for testing */
-
 import jsdom from 'jsdom';
 
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
@@ -15,6 +13,5 @@ Object.keys(window).forEach((key) => {
     global[key] = window[key];
   }
 });
-
 
 chai.use(chaiImmutable);

@@ -25,44 +25,16 @@ module.exports = function loadUserRoutes(router, passport) {
     res.send( { message: 'Successfully logged out' } );
   });
 
-  //get auth credentials from server
+
+
+  /* Currently Unused */
   router.get('/load_auth_into_state', function(req, res) {
 
     if(!req.user){
       return res.status(500).json({msg: 'User not logged in'});
     }
 
-    Room
-    .find({ _creator: req.user._id })
-    .exec(function (err, rooms) {
-      if (err) return handleError(err);
-      res.json(rooms);
-    })
+    re.json(req.user);
   });
 
-  // get usernames for validating whether a username is available
-  router.get('/allusers', function(req, res) {
-    User.find({'local.username': { $exists: true } }, {'local.username': 1, _id:0}, function(err, data) {
-      if(err) {
-        console.log(err);
-        return res.status(500).json({msg: 'internal server error'});
-      }
-      res.json(data);
-    });
-  })
-
-  // Check if username in DB
-  router.post('/validate_username', function(req, res) {
-    User.find({username: req.body.username}, function(err, data) {
-      if (err) {
-        console.log(err)
-        return res.status(500).json({msg: 'error validating username'})
-      }
-      if (data.length > 0) {
-        res.json({valid: false})
-      } else {
-        res.json({valid: true})
-      }
-    }).limit(1)
-  })
 };

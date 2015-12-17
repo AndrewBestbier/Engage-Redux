@@ -2,7 +2,7 @@ import {expect} from 'chai';
 
 import {Map, fromJS, List} from 'immutable';
 
-import reducer from '../../client/js/reducers/rooms';
+import reducer from '../../../client/js/reducers/rooms';
 
 describe('room', () => {
 

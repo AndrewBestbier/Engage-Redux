@@ -56,7 +56,7 @@ function joinRoomSuccess(data, roomCode) {
 
 export function createRoom(room) {
   return function(dispatch) {
-    customPost('/api/rooms/new_room', room)
+    customPost('/api/rooms/', room)
       .then(function(data) {
         dispatch(createRoomSuccess(data));
       })

@@ -49,3 +49,5 @@ app.use('/', express.static(path.join(__dirname)));
 http.listen(process.env.PORT, function() {
     console.log('server listening on port: %s', process.env.PORT);
 });
+
+module.exports = app;
