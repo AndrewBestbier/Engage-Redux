@@ -26,6 +26,12 @@ export function addMessage(message) {
   };
 }
 
+export function leaveRoom() {
+  return {
+    type: 'LEFT_ROOM'
+  };
+}
+
 
 export function joinRoom(roomCode) {
   return function(dispatch) {

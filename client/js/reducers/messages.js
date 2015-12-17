@@ -8,6 +8,8 @@ export default function(state = initialState, action) {
     return state.push(fromJS(action.data));;
   case 'JOINING_ROOM_SUCCESS':
     return state.merge(action.data);
+  case 'LEFT_ROOM':
+    return state.clear();
   default:
     return state;
   }

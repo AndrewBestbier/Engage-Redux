@@ -18,11 +18,15 @@ export default class Chat extends Component {
     const { dispatch } = this.props;
     this.socket.emit('subscribe', this.props.currentRoom);
 
-    const { actions } = this.props;
-
     this.socket.on('backchannel', message =>
       dispatch(this.props.actions.addMessage(message))
     );
+  }
+
+  componentWillUnmount(){
+    this.socket.emit('unsubscribe', this.props.currentRoom); //Doesn't work currently
+    const { dispatch } = this.props;
+    dispatch(this.props.actions.leaveRoom());
   }
 
   close() {

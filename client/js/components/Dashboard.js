@@ -92,7 +92,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-      createdRooms: state.user.get('createdRooms')
+      createdRooms: state.rooms.get('createdRooms')
   }
 }
 

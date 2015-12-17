@@ -6,6 +6,10 @@ exports = module.exports = function(io) {
 
     socket.on('subscribe', function(room) {
         socket.join(room);
+    });
+
+    socket.on('unsubscribe', function(room) {
+      socket.leave(room);
     })
   });
 }
