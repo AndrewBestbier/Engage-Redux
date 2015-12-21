@@ -1,20 +1,17 @@
-import {customPost, customGet} from '../utils/customFetch';
+import {customPost, customGet, customPut} from '../utils/customFetch';
 import history from '../utils/history'
 
 export function submitMessage(message, socket) {
   return function(dispatch) {
-    //Optimistic Update here. If the Post fails, this is reverted.
-    dispatch(addMessage(message));
-
-    //Then Post the message to be written in our database.
     customPost('/api/messages', message)
       .then(function(data) {
         //Now that the Post was successful, we can broadcast this message to all other users in the room
-        socket.emit('new message', data);
+        dispatch(addMessage(data));
+        socket.emit('submit message', data);
       })
       .catch(function(ex) {
         console.log(ex);
-        //Revert this previous message here.
+        //Show Error Message
       });
   };
 }
@@ -22,6 +19,29 @@ export function submitMessage(message, socket) {
 export function addMessage(message) {
   return {
     type: 'RECEIVE_MESSAGE',
+    data: message
+  };
+}
+
+export function voteAction(message, socket) {
+  return function(dispatch) {
+    //Then Post the message to be written in our database.
+    customPut('/api/messages', message)
+      .then(function(data) {
+        //Now that the Put was successful, we can broadcast this vote to all other users in the room
+        dispatch(vote(message));
+        socket.emit('submit vote', message);
+      })
+      .catch(function(ex) {
+        console.log(ex);
+        //Show Error Message
+      });
+  };
+}
+
+export function vote(message) {
+  return {
+    type: 'VOTE',
     data: message
   };
 }

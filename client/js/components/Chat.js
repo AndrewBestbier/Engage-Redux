@@ -18,8 +18,12 @@ export default class Chat extends Component {
     const { dispatch } = this.props;
     this.socket.emit('subscribe', this.props.currentRoom);
 
-    this.socket.on('backchannel', message =>
+    this.socket.on('broadcast message', message =>
       dispatch(this.props.actions.addMessage(message))
+    );
+
+    this.socket.on('broadcast vote', message =>
+      dispatch(this.props.actions.vote(message))
     );
   }
 
@@ -46,15 +50,28 @@ export default class Chat extends Component {
 
     let newMessage = {
       text: this.state.text,
-      roomId: this.props.currentRoom
+      roomId: this.props.currentRoom,
+      vote: 0 //Don't bother trying to change this hacker :) I have checks in place for you.
     };
     dispatch(this.props.actions.submitMessage(newMessage, this.socket));
     this.setState({showModal: false, text: ''})
   }
 
+  handleVote(_id, voteValue){
+    const { dispatch } = this.props;
+
+    let newMessage = {
+      _id: _id,
+      vote: voteValue,
+      roomId: this.props.currentRoom
+    };
+
+    dispatch(this.props.actions.voteAction(newMessage, this.socket));
+  }
+
   render() {
 
-    const filteredMessages = this.props.messages.map(message => <Card message={message} />);
+    const filteredMessages = this.props.messages.map(message => <Card message={message} handleVote={::this.handleVote} key={message._id} />);
 
     return (
       <div>
