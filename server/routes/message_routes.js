@@ -25,6 +25,7 @@ module.exports = function(router) {
     if(vote != 1 && vote != -1 || !messageId){
       return res.status(500).json({msg: 'internal server error'});
     }
+    
     Message.update({_id: messageId}, {$inc : {vote: vote}}, {}, function(err, data) {
         if(err) {
           return res.status(500).json({msg: 'internal server error'});

@@ -4,16 +4,26 @@ export default class Card extends Component {
 
   render() {
     return (
-      <div className="panel panel-default" key={this.props.message.get('_id')}>
-        <div className="panel-body">
-          <div className="panel-heading">
-            <div className="btn-group pull-right">
-              <a href="#" className="btn btn-default btn-xs">## Lock</a>
-              <a href="#" className="btn btn-default btn-xs">## Delete</a>
-              <a href="#" className="btn btn-default btn-xs">## Move</a>
-            </div>
-            <h4 className="panel-title">{this.props.message.get('text')}</h4>
-          </div>
+      <div className="card">
+        <div className="card-header ch-alt">
+          <h2>{this.props.message.get('text')}</h2>
+            <ul className="actions">
+              <li>
+                <a onClick={::this.props.handleVote.bind(this, this.props.message.get('_id'), -1)}>
+                    <i className="zmdi zmdi-long-arrow-down"></i>
+                </a>
+              </li>
+              <li>
+                <a>
+                    <i className="zmdi">{this.props.message.get('vote')}</i>
+                </a>
+              </li>
+              <li>
+                <a onClick={::this.props.handleVote.bind(this, this.props.message.get('_id'), 1)}>
+                    <i className="zmdi zmdi-long-arrow-up"></i>
+                </a>
+              </li>
+          </ul>
         </div>
       </div>
     );
