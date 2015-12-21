@@ -10,6 +10,16 @@ export default function(state = initialState, action) {
     return state.merge(action.data);
   case 'LEFT_ROOM':
     return state.clear();
+  case 'VOTE':
+    return state.update(
+      state.findIndex(function(message){
+        //Finding the message that is being voted on
+        return message.get('id') === action.data.id;
+      }), function(message){
+        //Updating the vote count of that message. Note that this can be positive or negative
+        return message.update('vote', vote => vote + action.data.vote);
+      }
+    )
   default:
     return state;
   }

@@ -7,6 +7,13 @@ export function customPost(url, body) {
    });
 }
 
+export function customPut(url, body) {
+  return request('put', url, body)
+   .then(function(response) {
+     return response.json();
+   });
+}
+
 export function customGet(url) {
   return request('get', url, null)
   .then(function(response) {

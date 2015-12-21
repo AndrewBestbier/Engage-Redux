@@ -19,6 +19,28 @@ export function submitMessage(message, socket) {
   };
 }
 
+export function voteOnMessage(message, socket) {
+  return function(dispatch) {
+    //Optimistic Update here. If the Post fails, this is reverted.
+    //dispatch(addMessage(message));
+
+    //Then Post the message to be written in our database.
+    customPut('/api/messages', message)
+      .then(function(data) {
+        //Now that the Post was successful, we can broadcast this message to all other users in the room
+        //socket.emit('new message', data);
+        console.log(data);
+      })
+      .catch(function(ex) {
+        console.log(ex);
+        //Revert this previous message here.
+      });
+  };
+}
+
+
+
+
 export function addMessage(message) {
   return {
     type: 'RECEIVE_MESSAGE',

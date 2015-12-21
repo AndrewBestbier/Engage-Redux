@@ -4,27 +4,32 @@ var bodyparser = require('body-parser');
 module.exports = function(router) {
   router.use(bodyparser.json());
 
-  /* Unused
-  router.get('/messages', function(req, res) {
-    Message.find({}, {id: 1, channelID: 1, text: 1, user: 1, time: 1, _id: 0}, function(err, data) {
-      if(err) {
-        console.log(err);
-        return res.status(500).json({msg: 'internal server error'});
-      }
-      res.json(data);
-    });
-  }); */
-
-  //post a new message to db
+  //Posting a new message into the database
   router.post('/messages/', function(req, res) {
     var newMessage = new Message(req.body);
 
     newMessage.save(function (err, data) {
       if(err) {
-        console.log(err);
         return res.status(500).json({msg: 'internal server error'});
       }
       res.json(data);
     });
+  });
+
+  router.put('/messages/', function(req, res) {
+    //var newMessage = new Message(req.body);
+
+    var messageId = req.body.messageId;
+    var vote = req.body.vote;
+
+    if(vote != 1 && vote != -1 || !messageId){
+      return res.status(500).json({msg: 'internal server error'});
+    }
+    Message.update({_id: messageId}, {$inc : {vote: vote}}, {}, function(err, data) {
+        if(err) {
+          return res.status(500).json({msg: 'internal server error'});
+        }
+        res.json(data)
+    })
   });
 }

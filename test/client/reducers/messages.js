@@ -73,4 +73,35 @@ describe('messages', () => {
 
     expect(finalState).to.equal(List());
   });
+
+  it('handles both positive and negative VOTE actions', () => {
+    const initialState = fromJS(
+      [{id: 'a1', text: 'First Message', vote: 0}, {id: 'a2', text: 'Second Message', vote: 0}, {id: 'a3', text: 'Third Message', vote: 0}]
+    );
+
+    /* Up Vote */
+    const upVoteAction = {
+      type: 'VOTE',
+      data: {id: 'a1', vote: 1 }
+    };
+
+    const nextState = reducer(initialState, upVoteAction);
+
+    expect(nextState).to.equal(fromJS(
+      [{id: 'a1', text: 'First Message', vote: 1}, {id: 'a2', text: 'Second Message', vote: 0}, {id: 'a3', text: 'Third Message', vote: 0}]
+    ));
+
+    /* Down Vote */
+    const downVoteAction = {
+      type: 'VOTE',
+      data: {id: 'a2', vote: -1 }
+    };
+
+    const finalState = reducer(nextState, downVoteAction);
+
+    expect(finalState).to.equal(fromJS(
+      [{id: 'a1', text: 'First Message', vote: 1}, {id: 'a2', text: 'Second Message', vote: -1}, {id: 'a3', text: 'Third Message', vote: 0}]
+    ));
+
+  })
 });
